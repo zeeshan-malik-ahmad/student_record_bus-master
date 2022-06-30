@@ -32,39 +32,8 @@ class _ViewRootState extends State<ViewRoot> {
     getData();
   }
 
-  _createPolylines(
-      double startLatitude,
-      double startLongitude,
-      double destinationLatitude,
-      double destinationLongitude,
-      ) async {
-    polylinePoints = PolylinePoints();
-    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      Secrets.kApiKey, // Google Maps API Key
-      PointLatLng(startLatitude, startLongitude),
-      PointLatLng(destinationLatitude, destinationLongitude),
-      // travelMode: TravelMode.transit,
-    );
-
-    if (result.points.isNotEmpty) {
-      for (var point in result.points) {
-        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-      }
-    }
-
-    PolylineId id = const PolylineId('poly');
-    Polyline polyline = Polyline(
-      polylineId: id,
-      color: Colors.red,
-      points: polylineCoordinates,
-      width: 3,
-    );
-    polylines[id] = polyline;
-  }
-
   getData()async{
 
-    await _createPolylines(33.9946, 72.9106, 34.1985, 73.2431);
     for(int i=0; i < widget.latLng.length; i++)
     {
       print(widget.latLng[i].latitude);
@@ -83,6 +52,37 @@ class _ViewRootState extends State<ViewRoot> {
     setState((){
       listMarker.add(initialPointMarker);
     });
+    _createPolylines();
+  }
+
+  _createPolylines() async {
+    polylinePoints = PolylinePoints();
+    await polylinePoints
+        .getRouteBetweenCoordinates(
+      Secrets.kApiKey,
+      PointLatLng(widget.latLng[widget.latLng.length - 1].latitude,
+          widget.latLng[widget.latLng.length - 1].longitude), //Starting LATLANG
+      PointLatLng(
+          widget.latLng[0].latitude, widget.latLng[0].longitude), //End LATLANG
+
+      travelMode: TravelMode.driving,
+    )
+        .then((value) {
+      for (var point in value.points) {
+        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
+      }
+    });
+
+    PolylineId id = const PolylineId('poly');
+    Polyline polyline = Polyline(
+      polylineId: id,
+      color: Colors.red,
+      points: polylineCoordinates,
+      width: 3,
+    );
+    polylines[id] = polyline;
+    polylines.addAll(polylines);
+    setState(() {});
   }
 
   @override

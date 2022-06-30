@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:student_record_bus/chat_bot/chatbot_screen.dart';
 import 'dart:ui';
 
 import '../Authentication/auth.dart';
@@ -96,11 +97,11 @@ class _MyCustomUIState extends State<MyCustomUI>
               ),
               homePageCardsGroup(
                 color: Colors.lightGreen,
-                icon: Icons.gamepad_outlined,
+                icon: Icons.message_outlined,
                 color2: const Color(0xffffa700),
-                title: 'Bus',
+                title: 'Chat Bot',
                 context: context,
-                route: const RouteWhereYouGo(),
+                route: const ChatBotScreen(),
                 icon2: Icons.person,
                 route2: const Profile(),
                 title2: 'Student Profile',
