@@ -27,7 +27,11 @@ class _RouteTrackState extends State<RouteTrack> {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: FirebaseAnimatedList(
-          defaultChild:Center(child: const CircularProgressIndicator(strokeWidth: 1.5, color: Colors.blue,)),
+          defaultChild: const Center(
+              child: CircularProgressIndicator(
+            strokeWidth: 1.5,
+            color: Colors.blue,
+          )),
           query: db,
           itemBuilder: (BuildContext context, DataSnapshot snapshot, Animation<double> animation, int index)
           {
@@ -45,15 +49,33 @@ class _RouteTrackState extends State<RouteTrack> {
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => TrackBuses(path: data,)));
                   },
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: ListTile(
-                      leading: Text(
-                        data,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
-                      ),
-                      trailing: const Icon(Icons.location_on_outlined),
+                    padding: const EdgeInsets.all(5.0),
+                    child: Ink(
+                      width: 200,
+                      height: 50,
+                      color: Colors.white,
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 10.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                data,
+                                style: const TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                         
+                            ],
                     ),
+                        ),
+                      ),
+                    ),
+              
                   ),
                 ),
               ),
@@ -65,3 +87,17 @@ class _RouteTrackState extends State<RouteTrack> {
     );
   }
 }
+
+
+// Padding(
+//                     padding: const EdgeInsets.symmetric(vertical: 10.0),
+//                     child: ListTile(
+                      
+//                       leading: Text(
+//                         data,
+//                         style: const TextStyle(
+//                             fontWeight: FontWeight.bold, fontSize: 20),
+//                       ),
+//                       trailing: const Icon(Icons.location_on_outlined),
+//                     ),
+//                   ),

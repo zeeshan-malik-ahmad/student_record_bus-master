@@ -13,7 +13,8 @@ class NotificationService{
 
 
   static void initialize(){
-    final InitializationSettings initializationSettings = InitializationSettings(
+    const InitializationSettings initializationSettings =
+        InitializationSettings(
       android: AndroidInitializationSettings(""),
     );
 

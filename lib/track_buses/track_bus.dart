@@ -2,11 +2,11 @@ import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:student_record_bus/HomePage/hp.dart';
 import 'package:student_record_bus/track_buses/track_buses_stations.dart';
 
 
 import '../Authentication/auth.dart';
-import '../HomePage/home_page.dart';
 
 
 
@@ -31,8 +31,15 @@ class _TrackBusesState extends State<TrackBuses> {
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
         leading: IconButton(onPressed: (){
-          Navigator.push(context, PageTransition(child: HomePage(auth: Auth(),), type: PageTransitionType.leftToRight));
-        }, icon: Icon(Icons.arrow_back)),
+              Navigator.push(
+                  context,
+                  PageTransition(
+                      child: MyCustomUI(
+                        auth: Auth(),
+                      ),
+                      type: PageTransitionType.leftToRight));
+            },
+            icon: const Icon(Icons.arrow_back)),
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(

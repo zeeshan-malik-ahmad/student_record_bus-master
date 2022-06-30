@@ -28,7 +28,11 @@ class _TrackBusesStationsState extends State<TrackBusesStations> {
 
   @override
   Widget build(BuildContext context) {
-    final reference = db.child(widget.path!).child("Buses").child(widget.busNo!).child("Stations");
+    final reference = db
+        .child(widget.path!)
+        .child("Buses")
+        .child(widget.busNo)
+        .child("Stations");
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(onPressed: route, child:const Icon(Icons.location_on_outlined),),
