@@ -8,7 +8,6 @@ import '../BusSchedule/bus_list.dart';
 import '../BusSchedule/root_list.dart';
 import '../Profile/profile.dart';
 import '../track_buses/route_track.dart';
-import '../track_buses/track_bus.dart';
 
 class MyCustomUI extends StatefulWidget {
   final Auth auth;
@@ -118,16 +117,9 @@ class _MyCustomUIState extends State<MyCustomUI>
                 InkWell(
                   highlightColor: Colors.transparent,
                   splashColor: Colors.transparent,
-                  onTap: () {
-                    HapticFeedback.lightImpact();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) {
-                          return const RouteWhereYouGo();
-                        },
-                      ),
-                    );
+                  onTap: () async {
+                    await widget.auth.signOut();
+              
                   },
                   child: ClipRRect(
                     borderRadius: const BorderRadius.all(Radius.circular(99)),
@@ -142,7 +134,7 @@ class _MyCustomUIState extends State<MyCustomUI>
                         ),
                         child: Center(
                           child: Icon(
-                            Icons.settings,
+                            Icons.logout,
                             size: _w / 17,
                             color: Colors.black.withOpacity(.6),
                           ),
