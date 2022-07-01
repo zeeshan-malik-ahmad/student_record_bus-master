@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
@@ -20,6 +22,35 @@ class MyCustomUI extends StatefulWidget {
 
 class _MyCustomUIState extends State<MyCustomUI>
     with SingleTickerProviderStateMixin {
+
+  String regNo = "";
+  String name = "";
+  String firstLetter = "";
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    fetchEmail();
+  }
+
+  fetchEmail() async {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+    final data = await FirebaseDatabase.instance
+        .ref()
+        .child("Approve User")
+        .child(uid)
+        .get();
+
+    Map values = data.value as Map;
+    setState(() {
+      regNo = values['Registeration No'];
+      name = values['Name'];
+      firstLetter = name[0];
+    });
+  }
+
+  final db = FirebaseDatabase.instance.ref().child("User");
   goto() {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => const BusList()));
@@ -51,6 +82,88 @@ class _MyCustomUIState extends State<MyCustomUI>
     double _w = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        elevation: 0,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            color: Colors.blue,
+          ),
+        ),
+        foregroundColor: Colors.white,
+        title: const Text(
+          "Home Page",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        centerTitle: true,
+        // actions: [
+        //   IconButton(
+        //     icon: const Icon(
+        //       Icons.notifications,
+        //       color: Colors.white,
+        //     ),
+        //     onPressed: () {
+        //       Navigator.of(context).push(MaterialPageRoute(
+        //           builder: (context) => const Notifications()));
+        //     },
+        //     iconSize: 30,
+        //   ),
+        // ],
+      ),
+      drawer: Drawer(
+        elevation: 0,
+        child: ListView(
+          children: [
+            DrawerHeader(
+              padding: EdgeInsets.zero,
+              decoration: const BoxDecoration(),
+              child: UserAccountsDrawerHeader(
+                currentAccountPicture: CircleAvatar(
+                  backgroundColor: Colors.black,
+                  child: Text(
+                    firstLetter,
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                ),
+                accountName: Text(
+                  regNo,
+                  style: const TextStyle(fontSize: 20),
+                ),
+                accountEmail: Text(
+                  name,
+                  style: const TextStyle(fontSize: 20),
+                ),
+              ),
+            ),
+            // ListTile(
+            //   title: const Text(
+            //     "Profile",
+            //     style: TextStyle(fontSize: 20),
+            //   ),
+            //   leading: const Icon(
+            //     Icons.person,
+            //     color: Colors.black,
+            //   ),
+            //   onTap: profile,
+            // ),
+            const Divider(),
+            ListTile(
+              title: const Text(
+                "Log out",
+                style: TextStyle(fontSize: 20),
+              ),
+              leading: const Icon(
+                Icons.logout,
+                color: Colors.black,
+              ),
+              onTap: () async {
+                await widget.auth.signOut();
+              },
+            ),
+          ],
+        ),
+      ),
       body: Stack(
         children: [
           /// ListView
@@ -59,18 +172,18 @@ class _MyCustomUIState extends State<MyCustomUI>
                 parent: AlwaysScrollableScrollPhysics()),
             children: [
               Padding(
-                padding: EdgeInsets.fromLTRB(_w / 17, _w / 20, 0, _w / 10),
+                padding: EdgeInsets.fromLTRB(_w / 17, _w / 50, 0, _w / 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Home page',
-                      style: TextStyle(
-                        fontSize: 27,
-                        color: Colors.black.withOpacity(.6),
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
+                    // Text(
+                    //   'Home page',
+                    //   style: TextStyle(
+                    //     fontSize: 27,
+                    //     color: Colors.black.withOpacity(.6),
+                    //     fontWeight: FontWeight.w700,
+                    //   ),
+                    // ),
                     SizedBox(height: _w / 35),
                     Text(
                       '',

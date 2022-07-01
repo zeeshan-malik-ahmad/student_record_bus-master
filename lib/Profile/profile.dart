@@ -50,12 +50,9 @@ class _ProfileState extends State<Profile> {
       body: Padding(
         padding: const EdgeInsets.only(top: 10),
         child: Column(
-          
           children: [
             Card(
-              
               child: ListTile(
-                
                 title: Column(
                   children: [
                     const SizedBox(
@@ -80,7 +77,12 @@ class _ProfileState extends State<Profile> {
                     Text("Password : " + password),
                     const SizedBox(
                       height: 10,
+
                     ),
+                    // InkWell(
+                      
+                    //   onTap: signOut(context),
+                    // )
                   ],
                 ),
               ),
@@ -91,10 +93,24 @@ class _ProfileState extends State<Profile> {
                   borderRadius: BorderRadius.circular(10),
                   borderSide: const BorderSide(color: Colors.blue, width: 1)),
             ),
+            
+            // InkWell(
+            //   onTap: signOut(context),
+            // )
           ],
+
         ),
       ),
-      
+     
     );
   }
+
+  signOut(BuildContext context) async {
+    await FirebaseAuth.instance.signOut().catchError((e) {
+      print(e);
+    });
+    Navigator.of(context).pop();
+  }
 }
+
+
