@@ -60,10 +60,10 @@ class _RoutListState extends State<RoutList> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10.0),
                 child: Container(
-                  width: 100.0,
-                  height: 100.0,
+                  width: MediaQuery.of(context).size.width,
+                  height: 70,
                   decoration: BoxDecoration(
-                    color: Colors.indigo,
+                    color: Colors.grey.shade300,
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                   child: Row(
@@ -72,7 +72,7 @@ class _RoutListState extends State<RoutList> {
                       Text(
                         initialPoint,
                         style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                            fontSize: 16, color: Colors.black),
                       ),
                       const CircleAvatar(
                         backgroundColor: Colors.black,
@@ -81,7 +81,7 @@ class _RoutListState extends State<RoutList> {
                       Text(
                         terminationPoint,
                         style: const TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+                            fontSize: 16, color: Colors.black),
                       ),
                     ],
                   ),

@@ -41,22 +41,11 @@ class _TrackBusesState extends State<TrackBuses> {
             },
             icon: const Icon(Icons.arrow_back)),
         flexibleSpace: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Colors.blue[400]!,
-                  Colors.blue[600]!,
-                  Colors.blue[700]!,
-                  Colors.blue[800]!,
-                ]
-            ),
-          ),
+          decoration: const BoxDecoration(color: Colors.blue),
         ),
-        title:const Text("Bus List"),
+        title: const Text("List Of Buses"),
         centerTitle: true,
-        toolbarHeight: 90,
+        
       ),
 
       body: Padding(
@@ -68,26 +57,25 @@ class _TrackBusesState extends State<TrackBuses> {
             final data = snapshot.key.toString();
 
             return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              padding: const EdgeInsets.symmetric(vertical: 20.0),
               child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: 50,
                 decoration: BoxDecoration(
-                    color: Colors.indigo.shade200,
-                    borderRadius: BorderRadius.circular(20.0)
+                  color: Colors.grey.shade300,
+                    
                 ),
                 child: GestureDetector(
                   onTap: (){
                     Navigator.of(context).push(MaterialPageRoute(builder: (context) => TrackBusesStations(busNo: data, path: widget.path,)));
                   },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: ListTile(
-                      leading: Text(
-                        "Bus No : " + data,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20),
-                      ),
-                      trailing: const Icon(Icons.location_on_outlined),
+                  child: ListTile(
+                    leading: Text(
+                      "Bus No : " + data,
+                      style: const TextStyle(
+                           fontSize: 18),
                     ),
+                    trailing: const Icon(Icons.location_on_outlined),
                   ),
                 ),
               ),

@@ -39,43 +39,22 @@ class _RouteTrackState extends State<RouteTrack> {
             final data = snapshot.key.toString();
             return Padding(
               padding: const EdgeInsets.symmetric(vertical: 10.0),
-              child: Container(
-                decoration: BoxDecoration(
-                    color: Colors.indigo.shade200,
-                    borderRadius: BorderRadius.circular(20.0)
-                ),
-                child: GestureDetector(
-                  onTap: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => TrackBuses(path: data,)));
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Ink(
-                      width: 200,
-                      height: 50,
-                      color: Colors.white,
-                      child: Container(
-                        alignment: Alignment.center,
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 10.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                data,
-                                style: const TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
-                         
-                            ],
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => TrackBuses(
+                            path: data,
+                          )));
+                },
+                child: Container(
+                  color: Colors.grey.shade300,
+                  child: ListTile(
+                    leading: Text(
+                      data,
+                      style: const TextStyle(
+                           fontSize: 18),
                     ),
-                        ),
-                      ),
-                    ),
-              
+                    trailing: const Icon(Icons.location_on_outlined),
                   ),
                 ),
               ),
@@ -87,17 +66,3 @@ class _RouteTrackState extends State<RouteTrack> {
     );
   }
 }
-
-
-// Padding(
-//                     padding: const EdgeInsets.symmetric(vertical: 10.0),
-//                     child: ListTile(
-                      
-//                       leading: Text(
-//                         data,
-//                         style: const TextStyle(
-//                             fontWeight: FontWeight.bold, fontSize: 20),
-//                       ),
-//                       trailing: const Icon(Icons.location_on_outlined),
-//                     ),
-//                   ),

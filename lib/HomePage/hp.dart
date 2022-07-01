@@ -110,44 +110,7 @@ class _MyCustomUIState extends State<MyCustomUI>
           ),
 
           /// SETTING ICON
-          Padding(
-            padding: EdgeInsets.fromLTRB(0, _w / 9.5, _w / 15, 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                InkWell(
-                  highlightColor: Colors.transparent,
-                  splashColor: Colors.transparent,
-                  onTap: () async {
-                    await widget.auth.signOut();
-              
-                  },
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.all(Radius.circular(99)),
-                    child: BackdropFilter(
-                      filter: ImageFilter.blur(sigmaY: 5, sigmaX: 5),
-                      child: Container(
-                        height: _w / 8.5,
-                        width: _w / 8.5,
-                        decoration: BoxDecoration(
-                          color: Colors.black.withOpacity(.05),
-                          shape: BoxShape.circle,
-                        ),
-                        child: Center(
-                          child: Icon(
-                            Icons.logout,
-                            size: _w / 17,
-                            color: Colors.black.withOpacity(.6),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-
+         
           // Blur the Status bar
           blurTheStatusBar(context),
         ],
