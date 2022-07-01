@@ -1,9 +1,9 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:student_record_bus/SplashScreen/splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'Notifications/notification_service.dart';
-
 
 Future<void> backgroundHandler(RemoteMessage message) async {
   NotificationService.display(message);
@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       title: 'COMSIANS CART',
       theme: ThemeData(
         primarySwatch: Colors.blue,
